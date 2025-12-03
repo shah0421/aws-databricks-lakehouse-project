@@ -1,6 +1,6 @@
 # Databricks S3 & Secrets Terraform Setup
 
-This Terraform project automates the provisioning of AWS resources and Databricks integration for securely storing and accessing S3 data via Unity Catalog. It follows best practices for IAM, Secrets Manager, and storage credentials.
+All the AWS resources needed for Databricks unity catalog to securly connect to AWS S3 Bucket to access and store data are provisioned using Terraform. It follows best practices for IAM, Secrets Manager, and storage credentials.
 
 ---
 
@@ -28,6 +28,9 @@ This setup provisions:
 
 4. **Databricks Storage Credential**
    - Connects Databricks Unity Catalog to the S3 bucket using the IAM role.
+
+5. **Copy files in S3 Bucket**
+    - AWS CLI aws s3 sync command has been used to copy files in S3 bucket in specified folder structure.
 
 ---
 
