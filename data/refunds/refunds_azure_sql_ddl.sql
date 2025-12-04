@@ -1,12 +1,12 @@
-CREATE TABLE Refunds (  
+CREATE TABLE refunds (  
     refund_id INT PRIMARY KEY,  
     payment_id INT NOT NULL,  
     refund_timestamp DATETIME NOT NULL,  
     refund_amount DECIMAL(10, 2) NOT NULL,  
-    refund_reason NVARCHAR(255) NOT NULL. 
+    refund_reason NVARCHAR(255) NOT NULL 
 );
 
-INSERT INTO Refunds (refund_id, payment_id, refund_timestamp, refund_amount, refund_reason)  
+INSERT INTO refunds (refund_id, payment_id, refund_timestamp, refund_amount, refund_reason)  
 VALUES  
 (1, 66, '2025-01-10 11:30:00', 85.75, 'Payment Error:Retailer'),  
 (2, 69, '2025-01-03 12:40:15', 120.50, 'Order Cancelled:Customer'),  
