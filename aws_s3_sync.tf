@@ -6,6 +6,7 @@ resource "null_resource" "sync_operational_data" {
       aws s3 sync ./data/orders s3://${var.s3_bucket_name}/gizmobox/landing/operational-data/Orders
       aws s3 sync ./data/memberships s3://${var.s3_bucket_name}/gizmobox/landing/operational-data/Memberships
       aws s3 sync ./data/customers_stream s3://${var.s3_bucket_name}/gizmobox/landing/operational-data/Customers_stream
+      aws s3 sync ./data/customers_autoloader s3://${var.s3_bucket_name}/gizmobox/landing/operational-data/Customers_autoloader
     EOT
 
     environment = {
