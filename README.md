@@ -1,3 +1,7 @@
+# 📘 AWS Databricks Lakehouse & Streaming Ingestion Projects
+
+This repository contains two comprehensive Databricks projects designed to demonstrate modern data engineering patterns on AWS. The first project showcases a full Lakehouse architecture built using Terraform, implementing the Medallion (Bronze–Silver–Gold) design, Unity Catalog governance, and automated ingestion pipelines from multiple data sources. The second project focuses specifically on streaming data ingestion, comparing traditional Spark Structured Streaming with Databricks Auto Loader, and demonstrating scalable, schema-aware ingestion of cloud file streams into Delta Lake. Together, these projects provide a complete view of batch + streaming data pipelines, cloud integration, and Lakehouse best practices.
+
 # 📘 AWS Databricks Lakehouse Project  
 ## Medallion Architecture + Terraform Infrastructure
 
@@ -28,7 +32,9 @@ Gold (BI + ML Ready Models)
 
 # Data Structure
 
-![Data Diagram](./images/data_diagram.png)
+<p align="center">
+  <img src="./images/data_diagram.png" width="600">
+</p>
 
 ---
 
@@ -60,6 +66,43 @@ Monthly customer order aggregated metrics:
 # Databricks S3 & Secrets Terraform Setup
 
 All the AWS resources needed for Databricks unity catalog to securly connect to AWS S3 Bucket to access and store data are provisioned using Terraform. It follows best practices for IAM, Secrets Manager, and storage credentials.
+
+---
+
+# 📘 Spark Structured Streaming and Autoloader Project
+
+This project ingests raw customer data from S3 into Delta Lake using Spark streaming, starting with standard Structured Streaming concepts and enhancing them using Databricks Auto Loader for scalability, performance, and schema management.
+
+---
+
+📥 End-to-End Streaming Workflow in This Project
+
+1. Read files from S3 using Auto Loader (cloudFiles).
+
+2. Add metadata columns, including:
+
+   - file_path – source file location
+
+   - ingest_date – timestamp when ingested
+
+3. Write the transformed stream to a Bronze Delta table with checkpointing.
+
+---
+
+Streaming Dashboard:
+
+
+<p align="center">
+  <img src="./images/streaming_data.png" width="600">
+</p>
+
+
+---
+
+Flow:
+```pgsql
+S3 → Auto Loader → Bronze Delta Table → Silver Transformation → Gold Analytics Tables
+```
 
 ---
 
