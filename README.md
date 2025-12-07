@@ -116,7 +116,7 @@ S3 → Auto Loader → Bronze Delta Table → Silver Transformation → Gold Ana
 
 ---
 
-# 🟨 Stores Streaming Data in Bronze Layer for Later use
+# 🟫 Stores Streaming Data in Bronze Layer for Later use
 
 ### **customer_steam**
     - Stores data as defined in the static schema
