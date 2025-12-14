@@ -1,4 +1,4 @@
-# 📘 ETL Lakehouse Workflow Project 
+# 📘 Lakeflow Declarative Pipeline Project 
 ## Medallion Architecture + Terraform Infrastructure
 
 This project demonstrates an end-to-end **LakeFlow declarative Pipeline** implementation, including:
@@ -70,6 +70,4 @@ The Silver tables are joined to produce a final Gold dataset:
 This table supports BI dashboards, ML feature engineering, and downstream analytics.
 
 ---
-
-## Repository Structure (Suggested)
 

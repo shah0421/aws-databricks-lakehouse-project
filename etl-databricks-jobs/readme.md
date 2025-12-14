@@ -1,4 +1,5 @@
-# Databricks Companies Data Job
+# 📘 Databricks Jobs Project
+## Medallion Architecture + Terraform Infrastructure
 
 ## Overview
 This project implements a **Databricks multi-layer data job** following the **Bronze → Silver → Gold** architecture.  
@@ -78,7 +79,7 @@ Gold Layer (Aggregated Insights)
 ## Email notification after job success/failure
 
 <p align="center">
-  <img src="./../images//job-notification.png" width="600">
+  <img src="./../images/job-notification.png" width="600">
 </p>
 
 ---

@@ -1,10 +1,14 @@
 # 📘 ETL Lakehouse Workflow & Streaming Ingestion Projects
 
-This repository contains two comprehensive Databricks projects designed to demonstrate modern data engineering patterns on AWS. 
+This repository contains four comprehensive Databricks projects designed to demonstrate modern data engineering patterns on AWS. 
 
 - etl-lakehouse-workflow project showcases a full Lakehouse architecture built using Terraform, implementing the Medallion (Bronze–Silver–Gold) design, Unity Catalog governance, and automated ingestion pipelines from multiple data sources. 
 
 - etl-with-apache-spark-streaming project focuses specifically on streaming data ingestion, comparing traditional Spark Structured Streaming with Databricks Auto Loader. It demonstrates scalable, schema-aware ingestion of cloud file streams into Delta Lake.
+
+- etl-lakehouse-declarative-pipeline-dlt project demonstrates an end-to-end lakeFlow declarative pipeline. It ingests data from S3 and applies Medallion Architechture. It also uses expect keyword for streaming validation along with the required course of action.
+
+- etl-databricks-jobs ingests data from s3 and by implementing medallion architechture, it creates bronze-silver-gold layers. These layers are assigned as tasks in the job. It also demonstrates how to schedule the job and send notification after success or failure.
 
 # 📘 ETL Lakehouse Workflow Project  
 ## Medallion Architecture + Terraform Infrastructure
@@ -123,6 +127,166 @@ S3 → Auto Loader → Bronze Delta Table → Silver Transformation → Gold Ana
 
 ### **customers_autoloader**
     - Stores data dynamically by using automatic schema inference from sample files.
+
+---
+
+# 📘 Lakeflow Declarative Pipeline Project 
+## Medallion Architecture + Terraform Infrastructure
+
+This project demonstrates an end-to-end **LakeFlow declarative Pipeline** implementation, including:
+
+- Automated infrastructure provisioning using **Terraform**
+- Ingesting data from **multiple sources & formats**
+- Applying the **Medallion Architecture** (Bronze → Silver → Gold)
+- Using the **EXPECT** keyword for streaming data validation, along with the required actions, in both Spark SQL and PySpark.
+- Building analytics-ready **Gold Layer** tables for BI & ML
+- Using **Unity Catalog** for secure governance
+
+All AWS resources required for Databricks + S3 access are provisioned using Terraform following IAM and security best practices.
+
+---
+
+# Data Structure
+
+<p align="center">
+  <img src="./images/data_diagram.png" width="600">
+</p>
+
+---
+
+## ETL Workflows
+
+### 1. Customers Data Pipeline
+Steps:
+1. Ingest raw customer data → `bronze_customers`
+2. Apply data quality expectations  
+3. Store cleaned output → `silver_customers_clean`
+4. Apply SCD Type 1 logic  
+5. Store final curated table → `silver_customers`
+
+---
+
+### 2. Addresses Data Pipeline
+Steps:
+1. Ingest raw address data → `bronze_addresses`
+2. Apply data quality expectations  
+3. Store cleaned output → `silver_addresses_clean`
+4. Apply SCD Type 2 logic  
+5. Store final curated table → `silver_addresses`
+
+---
+
+### 3. Orders Data Pipeline
+Steps:
+1. Ingest raw order data → `bronze_orders`
+2. Apply expectations and validation  
+3. Store cleaned output → `silver_orders_clean`
+4. Apply SCD Type 1 logic  
+5. Store final curated table → `silver_orders`
+
+---
+
+## Gold Layer (Final Aggregated Model)
+
+The Silver tables are joined to produce a final Gold dataset:
+
+- `silver_customers`  
+- `silver_addresses` (latest address per customer)  
+- `silver_orders`  
+
+### Final Metrics:
+- `total_orders`  
+- `total_items_order`  
+- `total_order_amount`  
+
+This table supports BI dashboards, ML feature engineering, and downstream analytics.
+
+---
+
+
+# 📘 Databricks Jobs Project
+## Medallion Architecture + Terraform Infrastructure
+
+## Overview
+This project implements a **Databricks multi-layer data job** following the **Bronze → Silver → Gold** architecture.  
+The pipeline ingests company data from a landing folder, performs transformations, and produces aggregated insights.
+
+---
+
+## Architecture
+The pipeline is organized into three layers:
+
+- **Bronze Layer**: Raw data ingestion
+- **Silver Layer**: Cleansed and transformed data
+- **Gold Layer**: Aggregated and business-ready data
+
+---
+
+## Job Structure
+
+### 1. 🟫 Bronze Layer – Ingest Companies Data
+**Task Name:** `process_company_data`
+
+#### Responsibilities
+- Create the `bronze` schema if it does not already exist
+- Read raw companies data from the landing folder
+- Create the `bronze.companies` table
+- Store raw data with minimal transformation
+
+#### Output
+- **Table:** `bronze.companies`
+
+---
+
+### 2. Silver Layer – Transform Companies Data
+**Task Name:** `silver.companies`
+
+#### Responsibilities
+- Create the `silver` schema if it does not already exist
+- Read data from `bronze.companies`
+- Apply data transformations and cleansing
+- Generate derived columns:
+  - `company_id`
+  - `founded_year`
+- Create the `silver.companies` table
+
+#### Output
+- **Table:** `silver.companies`
+
+---
+
+### 3. 🟨 Gold Layer – Company Summary
+**Task Name:** `03_gold_company_summary`
+
+#### Responsibilities
+- Create the `gold` schema if it does not already exist
+- Aggregate company data from the silver layer
+- Calculate the number of companies per country
+- Create a business-ready summary table
+
+#### Output
+- **Table:** `gold.company_summary`
+- **Metric:** Number of companies per country
+
+---
+
+## Data Flow
+```text
+Landing Folder
+      ↓
+Bronze Layer (Raw Data)
+      ↓
+Silver Layer (Transformed Data)
+      ↓
+Gold Layer (Aggregated Insights)
+```
+
+---
+## Email notification after job success/failure
+
+<p align="center">
+  <img src="./images/job-notification.png" width="600">
+</p>
 
 ---
 
