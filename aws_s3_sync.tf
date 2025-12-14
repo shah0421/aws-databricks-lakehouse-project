@@ -11,6 +11,7 @@ resource "null_resource" "sync_operational_data" {
       aws s3 sync ./data/circuitbox/customers s3://${var.s3_bucket_name}/circuitbox/landing/operational-data/Customers
       aws s3 sync ./data/circuitbox/orders s3://${var.s3_bucket_name}/circuitbox/landing/operational-data/Orders
       aws s3api put-object --bucket ${var.s3_bucket_name} --key circuitbox/lakehouse/
+      aws s3 sync ./data/top_tech_companies/ s3://${var.s3_bucket_name}/top_tech_companies/landing/companies
     EOT
 
     environment = {
