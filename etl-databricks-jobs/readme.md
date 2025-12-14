@@ -72,9 +72,13 @@ Bronze Layer (Raw Data)
 Silver Layer (Transformed Data)
       ↓
 Gold Layer (Aggregated Insights)
+```
 
 ---
+## Email notification after job success/failure
 
 <p align="center">
-  <img src="./../images/job_status_notification.png" width="600">
+  <img src="./../images//job-notification.png" width="600">
 </p>
+
+---
