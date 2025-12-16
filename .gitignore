@@ -21,3 +21,8 @@ terraform.rc
 # Terraform provider binaries (usually in .terraform/)
 terraform-provider-*
 
+# Databricks-connect for local development
+.databricks
+
+# Local Virtual Environment
+.venv/
