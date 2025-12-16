@@ -383,3 +383,14 @@ Keys required:
     - databricks_host
 
     - databricks_token
+
+
+# 🧪 Run Databricks locally from VS Code and Debug
+    - Create a Python Virtual Environment
+    - Configure Databricks Connect
+    - Debug/Run Code via Databricks Connect
+
+  
+<p align="center">
+  <img src="./images/local_databricks.png" width="600">
+</p>
