@@ -2,7 +2,7 @@
 
 This repository contains four comprehensive Databricks projects designed to demonstrate modern data engineering patterns on AWS. 
 
-- etl-lakehouse-workflow project showcases a full Lakehouse architecture built using Terraform, implementing the Medallion (Bronze–Silver–Gold) design, Unity Catalog governance, and automated ingestion pipelines from multiple data sources. 
+- etl-lakehouse-workflow project showcases a full Lakehouse architecture built using Terraform, implementing the Medallion (Bronze–Silver–Gold) design, Unity Catalog governance, and automated ingestion pipelines from multiple data sources. (etl-lakehouse-workflow project-pySpark is the same project but only change is that it uses pySpark instead of raw SQL)
 
 - etl-with-apache-spark-streaming project focuses specifically on streaming data ingestion, comparing traditional Spark Structured Streaming with Databricks Auto Loader. It demonstrates scalable, schema-aware ingestion of cloud file streams into Delta Lake.
 
